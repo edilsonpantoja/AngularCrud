@@ -36,12 +36,13 @@
       </tr>
     </table>
 
-    <div class="form-group" [class.has-error]="email.invalid && email.touched">
+    <div class="form-group" [class.has-error]="email.invalid">
         <label for="email" class="control-label">Email</label>
-        <input required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
-               id="email" type="text" class="form-control" name="email"
-               [(ngModel)]="employee.email" #email="ngModel">
-        <span class="help-block" *ngIf="email.errors?.required && email.touched">
+        <input id="email" [required]="contactPreference.value=='email'"
+                type="text" class="form-control"
+                pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+                [(ngModel)]="employee.email" #email="ngModel" name="email">
+        <span class="help-block" *ngIf="email.errors?.required">
           Email is required
         </span>
         <span class="help-block" *ngIf="email.errors?.pattern && email.touched">
@@ -49,25 +50,34 @@
         </span>
     </div>
 
-    <div class="form-group">
-        <label for="phoneNumber">Phone Number</label>
-        <input id="phoneNumber" name="phoneNumber" [(ngModel)]="employee.phoneNumber" type="text" class="form-control">
+    <div class="form-group" [class.has-error]="phoneNumber.invalid">
+        <label for="phoneNumber" class="control-label">Phone Number</label>
+        <input id="phoneNumber" [required]="contactPreference.value=='phone'"
+                #phoneNumber="ngModel" class="form-control" type="text"
+                name="phoneNumber" [(ngModel)]="employee.phoneNumber">
+        <span class="help-block" *ngIf="phoneNumber.errors?.required">
+          Phone Number is required
+        </span>
     </div>
 
-    <div class="form-group">
-        <label>Contact Preference</label>
+    <div class="form-group" [class.has-error]="contactPreference.invalid">
+        <label class="control-label">Contact Preference</label>
         <div class="form-control">
           <label class="radio-inline">
-            <input type="radio" name="contactPreference" value="email"
-            [(ngModel)]="employee.contactPreference">
-            Email
+            <input type="radio" required #contactPreference="ngModel" name="contactPreference"
+                    value="email" [(ngModel)]="employee.contactPreference"> Email
           </label>
           <label class="radio-inline">
-            <input type="radio" name="contactPreference" value="phone"
-            [(ngModel)]="employee.contactPreference">
-            Phone
+            <input type="radio" required #contactPreference="ngModel" name="contactPreference"
+                    value="phone" [(ngModel)]="employee.contactPreference"> Phone
           </label>
         </div>
+        <span class="help-block" *ngIf="contactPreference.errors?.required">
+            Contact Preference is required
+        </span>
+        <!-- Delete the below line after you see
+            the selected value in the browser -->
+        Contact Preference Selected Value : {{ contactPreference.value }}
     </div>
     
     <div class="form-group" [class.has-error]="gender.invalid">
@@ -86,30 +96,45 @@
           Gender is required
         </span>
         <span class="help-block" *ngIf="gender.errors?.required">
-            Gender is required
+          SGender is required
         </span>
     </div>
 
 
   </div>
 
-  <div class="form-group">
-    <div class="form-control">
-      <label class="checkbox-inline">
-        <input type="checkbox" name="isActive" [(ngModel)]="isActive">Is Active
-      </label>
-    </div>
+  <div class="form-group" [class.has-error]="isActive.invalid && isActive.touched">
+      <div class="form-control">
+        <label class="checkbox-inline control-label">
+          <input type="checkbox" required name="isActive"
+                 #isActive="ngModel" [(ngModel)]="employee.isActive">
+          Is Active
+        </label>
+      </div>
+      <span class="help-block"
+            *ngIf="isActive.errors?.required && isActive.touched">
+        Is Active is required
+      </span>
   </div>
 
-  <div class="form-group">
-    <label for="department">Department</label>
-    <select id="department" name="department"
-            [(ngModel)]="employee.department" class="form-control">
-      <option *ngFor="let dept departments" [value]="dept.id">
+  <div class="form-group"
+     [class.has-error]="department.touched && department.errors?.defaultSelected">
+    <label for="department" class="control-label">
+      Department
+    </label>
+    <select id="department" appSelectValidator="select" name="department" [(ngModel)]="employee.department" 
+          class="form-control" #department="ngModel">
+      <option value="select">Select Department</option>
+      <option *ngFor="let dept of departments" [value]="dept.id">
         {{dept.name}}
       </option>
     </select>
+    <span class="help-block"
+          *ngIf="department.touched && department.errors?.defaultSelected">
+      Department is required
+    </span>
   </div>
+
 
   <div class="row">
     <div class="form-group col-md-4">
