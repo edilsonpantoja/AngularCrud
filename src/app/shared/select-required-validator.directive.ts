@@ -10,6 +10,7 @@ import { Directive, Input } from '@angular/core';
         multi: true
     }]
 })
+
 export class SelectRequiredValidatorDirective implements Validator {
     // Create input property to receive the
     // specified default option value
