@@ -1,4 +1,4 @@
-<form #employeeForm="ngForm" (ngSubmit)="saveEmployee(employee)">
+<form #employeeForm="ngForm" (ngSubmit)="saveEmployee()">
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">Create Employee</h3>
@@ -163,7 +163,7 @@
 
 
   
-  <div ngModelGroup="passwordGroup" #passwordGroup="ngModelGroup" appConfirmEqualValidator 
+  <!-- <div ngModelGroup="passwordGroup" #passwordGroup="ngModelGroup" appConfirmEqualValidator 
     [class.has-error]="passwordGroup.errors?.notEqual
         && !confirmPassword.errors?.required">
   
@@ -187,9 +187,9 @@
             passwordGroup.errors?.notEqual && !confirmPassword.errors?.required">
         Password and Confirm Password does not match
       </span>
-    </div>
+    </div> 
+  </div>-->
   
-  </div>
   
   <div class="panel-body">
     <button type="submit" class="btn btn-primary" [disabled]="employeeForm.invalid">Save</button>

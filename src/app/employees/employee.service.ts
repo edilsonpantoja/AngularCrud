@@ -16,7 +16,7 @@ export class EmployeeService {
             contactPreference: 'Email',
             email: 'edilsonpantoja@titaniumtechcorp.com',
             dateOfBirth: new Date('10/25/1988'),
-            department: 'IT',
+            department: '1',
             isActive: true,
             photoPath: 'assets/images/edilson.jpg'
           },
@@ -27,7 +27,7 @@ export class EmployeeService {
             contactPreference: 'Phone',
             phoneNumber: 2345978640,
             dateOfBirth: new Date('03/23/1979'),
-            department: 'HR',
+            department: '2',
             isActive: true,
             photoPath: 'assets/images/erica.jpg'
           },
@@ -38,7 +38,7 @@ export class EmployeeService {
             contactPreference: 'Phone',
             phoneNumber: 5432978640,
             dateOfBirth: new Date('09/10/1977'),
-            department: 'IT',
+            department: '3',
             isActive: false,
             photoPath: 'assets/images/eddie.jpg'
           },
@@ -48,5 +48,8 @@ export class EmployeeService {
         return this.listEmployees;
     }
 
+    save(employee: Employee) {
+        this.listEmployees.push(employee);
+    } 
     
 }
