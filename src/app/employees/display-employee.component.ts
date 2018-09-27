@@ -10,6 +10,9 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
   @Input() employee : Employee;
   @Output() notify: EventEmitter<Employee> = new EventEmitter<Employee>();
 
+  getNameAndGender(): string {
+    return this.employee.name + ' ' + this.employee.gender;
+  }
 
 
   // Parent component will use this Input property to pass
