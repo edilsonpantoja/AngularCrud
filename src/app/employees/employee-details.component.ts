@@ -9,9 +9,10 @@ import { Employee } from '../models/employee.model';
   styleUrls: ['./employee-details.component.css']
 })
 export class EmployeeDetailsComponent implements OnInit {
-  employee: Employee;
+  
    // Include a private field _id to keep track of the route parameter value
   private _id;
+  employee: Employee;
   constructor(
               //private _route: ActivatedRoute,
               //private _employeeService: EmployeeService
