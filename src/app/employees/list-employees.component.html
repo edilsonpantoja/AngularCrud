@@ -1,6 +1,10 @@
 <h1 #h1Variable></h1>
+<div class="form-group">
+        <input type="text" class="form-control" placeholder="Search By Name"
+                style="width:300px" [(ngModel)]="searchTerm" />
+</div>
 
-<div *ngFor="let employee of employees">
+<div *ngFor="let employee of employees | employeeFilter:searchTerm">
     <!-- <div (click)="h1Variable.innerHTML = childComponent.getNameAndGender()">
     </div> -->
     <div (click)="onClick(employee.id)" class="pointerCursor">
